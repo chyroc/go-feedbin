@@ -21,6 +21,12 @@ func WithCredential(username, password string) ClientOptionFunc {
 	}
 }
 
+func WithTimeout(timeout time.Duration) ClientOptionFunc {
+	return func(r *Feedbin) {
+		r.timeout = timeout
+	}
+}
+
 func New(options ...ClientOptionFunc) *Feedbin {
 	return newClient(options)
 }
