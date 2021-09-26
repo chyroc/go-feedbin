@@ -60,7 +60,7 @@ import (
 
 func main() {
 	url := ""
-	cli := feedbin.New() // ExtractingContent no need auth
+	cli := feedbin.New()
 
 	resp, err := cli.ExtractingContent(context.Background(), &feedbin.ExtractingContentReq{
 		URL: url,
