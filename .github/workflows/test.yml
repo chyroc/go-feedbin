@@ -28,6 +28,9 @@ jobs:
       run: |
         export IN_CI=1
         ./.github/test.sh
+      env:
+        FEEDBIN_USERNAME: ${{ secrets.FEEDBIN_USERNAME }}
+        FEEDBIN_PASSWORD: ${{ secrets.FEEDBIN_PASSWORD }}
 
     - name: Upload Cov
       run: bash <(curl -s https://codecov.io/bash)
