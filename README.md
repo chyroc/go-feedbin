@@ -9,6 +9,8 @@
 
 ![](./header.png)
 
+Feedbin API Documentation: https://github.com/feedbin/feedbin-api.
+
 ## Install
 
 ```shell
