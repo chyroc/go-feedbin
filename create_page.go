@@ -13,17 +13,14 @@ import (
 // If successful, the response will be the full [entry](https://github.com/feedbin/feedbin-api/blob/master/content/entries.md).
 func (r *Feedbin) CreatePage(ctx context.Context, request *CreatePageReq) (*CreatePageResp, error) {
 	bs, _ := json.Marshal(request)
+	uri := "https://api.feedbin.com/v2/pages.json"
+
 	resp := new(CreatePageResp)
-	_, err := r.request(ctx,
-		http.MethodPost,
-		"https://api.feedbin.com/v2/pages.json",
-		bytes.NewReader(bs),
-		true,
-		resp,
-	)
+	_, err := r.request(ctx, http.MethodPost, uri, bytes.NewReader(bs), true, resp)
 	if err != nil {
 		return nil, err
 	}
+
 	return resp, nil
 }
 

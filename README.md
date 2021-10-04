@@ -46,6 +46,32 @@ func main() {
 }
 ```
 
+## Get Subscriptions
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+
+	"github.com/chyroc/go-feedbin"
+)
+
+func main() {
+	cli := feedbin.New(feedbin.WithCredential("username", "password"))
+
+	resp, err := cli.GetSubscriptions(context.Background(), &feedbin.GetSubscriptionsReq{})
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println("subscriptions length:", len(resp.Subscriptions))
+	for _, v := range resp.Subscriptions {
+		fmt.Println(v.ID, v.Title, v.FeedURL)
+	}
+}
+```
+
 ## Extracting Content
 
 ```go

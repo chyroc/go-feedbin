@@ -15,7 +15,7 @@ func (r *Feedbin) request(ctx context.Context, method, uri string, body io.Reade
 	if err != nil {
 		return "", err
 	}
-	if withAuth {
+	if withAuth && r.password != "" {
 		req.SetBasicAuth(r.username, r.password)
 	}
 	req.Header.Set("Content-Type", "application/json; charset=utf-8")
@@ -35,14 +35,14 @@ func (r *Feedbin) request(ctx context.Context, method, uri string, body io.Reade
 	}
 
 	res := new(baseResp)
-	if err = json.Unmarshal(bs, res); err != nil {
-		return "", err
-	} else if res.Err() != nil {
+	if _ = json.Unmarshal(bs, res); res.Err() != nil {
 		return "", res.Err()
 	}
 
-	if err = json.Unmarshal(bs, resp); err != nil {
-		return "", err
+	if resp != nil {
+		if err = json.Unmarshal(bs, resp); err != nil {
+			return "", err
+		}
 	}
 
 	return string(bs), nil
