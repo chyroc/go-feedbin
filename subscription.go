@@ -13,8 +13,8 @@ func (r *Feedbin) GetSubscriptions(ctx context.Context, request *GetSubscription
 	if !request.Since.IsZero() {
 		q.Set("since", request.Since.Format(time.RFC3339Nano))
 	}
-	if request.mode != "" {
-		q.Set("mode", request.mode)
+	if request.Mode != "" {
+		q.Set("mode", request.Mode)
 	}
 	uri.RawQuery = q.Encode()
 	resp := new(GetSubscriptionsResp)
@@ -38,7 +38,7 @@ type Subscription struct {
 
 type GetSubscriptionsReq struct {
 	Since time.Time // since=2013-03-08T09:44:20.449047Z will get all subscriptions created after the iso 8601 timestamp.
-	mode  string    // the only mode available is extended. This includes more metadata for the feed.
+	Mode  string    // the only mode available is extended. This includes more metadata for the feed.
 }
 
 type GetSubscriptionsResp struct {
