@@ -19,6 +19,8 @@ func (r *Feedbin) request(ctx context.Context, method, uri string, body io.Reade
 		req.SetBasicAuth(r.username, r.password)
 	}
 	req.Header.Set("Content-Type", "application/json; charset=utf-8")
+	req.Header.Set("User-Agent", fmt.Sprintf("go-feedbin/%s (https://github.com/chyroc/go-feedbin)", version))
+
 	response, err := r.httpClient.Do(req)
 	if err != nil {
 		return "", err
